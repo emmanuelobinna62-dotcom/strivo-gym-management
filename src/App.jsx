@@ -18,7 +18,6 @@ import Booking from "./pages/Booking"
 import TrainerProfile from "./pages/TrainerProfile"
 import ClassDetails from "./pages/ClassDetails"
 import Gallery from "./pages/Gallery"
-import SupabaseTest from "./pages/SupabaseTest"
 import Register from "./pages/Register"
 import Login from "./pages/Login"
 import ResetPassword from "./pages/ResetPassword"
@@ -40,7 +39,6 @@ const AppLayout = () => {
       {!hideNavbar && <Navbar />}
 
       <Routes>
-        <Route path="/supabase-test" element={<SupabaseTest />} />
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/classes" element={<Classes />} />
