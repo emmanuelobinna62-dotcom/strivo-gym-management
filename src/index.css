@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Roboto:wght@400;500&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --font-monst: "Montserrat", sans-serif;
+  --font-roboto: "Roboto", sans-serif;
+}
+
+.scrollbar-hide {
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
