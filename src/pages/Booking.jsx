@@ -192,6 +192,7 @@ const Booking = () => {
           setError("Unable to load the selected membership plan.")
         } else if (!data) {
           setError("This membership plan is unavailable.")
+
         } else {
           // Check whether the member is logged in.
           const {
@@ -220,19 +221,13 @@ const Booking = () => {
         setLoading(false)
         return
       }
-      // Ensure that a valid class or session ID has been provided.
-      if (!sessionId && !classId) {
-        setError("Please select a class or session to continue.")
-        setLoading(false)
-        return
-      }
 
-      setLoading(true)
-      setError("")
+      // Load upcoming sessions when no specific session is selected.
+      if (!sessionId) {
+        setLoading(true)
+        setError("")
 
-      // When a class ID is provided, fetch its upcoming scheduled sessions.
-      if (classId && !sessionId) {
-        const { data, error } = await supabase
+        let sessionsQuery = supabase
           .from("class_sessions")
           .select(`
             id,
@@ -247,20 +242,33 @@ const Booking = () => {
               name
             )
           `)
-          .eq("class_id", Number(classId))
           .eq("status", "scheduled")
           .gt("starts_at", new Date().toISOString())
           .order("starts_at", { ascending: true })
 
+        // Filter by class when a class ID is provided.
+        if (classId) {
+          sessionsQuery = sessionsQuery.eq(
+            "class_id",
+            Number(classId)
+          )
+        }
+
+        const { data, error } = await sessionsQuery
+
         if (error) {
           setError("Unable to load available sessions.")
         } else {
-          setAvailableSessions(data)
+          setAvailableSessions(data || [])
         }
 
         setLoading(false)
         return
       }
+
+
+    
+
 
       // Check the user's authentication status before loading booking details.
       const { data: { session: userSession }, error: authError } =
@@ -440,7 +448,7 @@ const Booking = () => {
   }
 
   // Display all upcoming sessions when the user selects a class.
-  if (classId && !sessionId) {
+  if (!sessionId) {
     return (
       <main className="min-h-screen bg-white px-6 py-16">
         <div className="mx-auto max-w-3xl">
