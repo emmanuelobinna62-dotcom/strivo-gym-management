@@ -718,7 +718,7 @@ const AdminDashboard = () => {
 
       {/* Sidebar */}
       <aside
-        className={`fixed left-0 top-0 z-50 flex h-screen w-[270px] flex-col border-r border-gray-800 bg-[#080812] transition-transform duration-300 lg:translate-x-0 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
+        className={`fixed left-0 top-0 z-50 flex h-screen w-67.5 flex-col border-r border-gray-800 bg-[#080812] transition-transform duration-300 lg:translate-x-0 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
           }`}
       >
 
@@ -751,7 +751,7 @@ const AdminDashboard = () => {
                 onClick={() => handleNavigation(item.id)}
                 className={`flex w-full items-center gap-4 border-l-2 px-4 py-4 text-left transition ${activeSection === item.id
                   ? "border-red-500 bg-red-500/10 text-white"
-                  : "border-transparent text-gray-500 hover:bg-white/[0.03] hover:text-white"
+                  : "border-transparent text-gray-500 hover:bg-white/3 hover:text-white"
                   }`}
               >
 
